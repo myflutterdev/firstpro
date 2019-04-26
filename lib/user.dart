@@ -1,10 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:equatable/equatable.dart';
 
 part 'user.g.dart';
 
 @JsonSerializable()
-class User{
-  User({this.id, this.uid, this.title, this.body});
+class User extends Equatable{
+  User({this.id, this.uid, this.title, this.body}) : super([id, uid, title, body]);
 
   @JsonKey(name: 'userId')
   final int uid;

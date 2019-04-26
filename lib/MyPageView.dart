@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:myapp/autoloadlist/user_listpage.dart';
 import 'dart:async';
 import 'user.dart';
 
@@ -153,7 +154,7 @@ class MyPageView extends StatelessWidget {
               ),
             ),
 
-            Expanded(child: UserListView()),
+            Expanded(child: testUserList()),
 
           ],
 

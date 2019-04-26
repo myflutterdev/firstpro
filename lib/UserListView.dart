@@ -3,7 +3,6 @@ part of 'MyPageView.dart';
 class UserListView extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _MyListView();
-
 }
 
 class _MyListView extends State<StatefulWidget> {
@@ -57,6 +56,17 @@ class _MyListView extends State<StatefulWidget> {
     // TODO: implement initState
 
     super.initState();
+  }
+
+  @override
+  void deactivate() {
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    _streamCtl.close();
+    super.dispose();
   }
 
   Future<List<User>> _loadData() async {

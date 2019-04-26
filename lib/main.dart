@@ -9,8 +9,20 @@ import 'package:flutter/material.dart';
 import 'MyCustomButton.dart';
 
 import 'MyPageView.dart';
+import 'package:bloc/bloc.dart';
 
-void main() => runApp(MyApp());
+class SimpleBlocDelegate extends BlocDelegate {
+  @override
+  void onTransition(Transition transition) {
+    super.onTransition(transition);
+    print(transition);
+  }
+}
+
+void main() {
+  BlocSupervisor().delegate = SimpleBlocDelegate();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -27,7 +39,10 @@ class MyApp extends StatelessWidget {
               mcontext: context,
               mtitle: 'Odd',
             ),
-        '/even': (BuildContext context) => MyPageView(mcontext: context, mtitle: 'Even',),
+        '/even': (BuildContext context) => MyPageView(
+              mcontext: context,
+              mtitle: 'Even',
+            ),
       },
 //      debugShowMaterialGrid: true,
     );
