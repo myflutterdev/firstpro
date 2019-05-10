@@ -64,7 +64,6 @@ class MyPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       backgroundColor: Colors.green,
       bottomNavigationBar: BottomAppBar(color: Colors.white, child: Container(height: 0,),),
@@ -154,7 +153,7 @@ class MyPageView extends StatelessWidget {
               ),
             ),
 
-            Expanded(child: testUserList()),
+            Expanded(child: TestUserList()),
 
           ],
 

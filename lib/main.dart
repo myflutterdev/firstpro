@@ -6,10 +6,14 @@
 // connected to a callback that increments a counter.
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'MyCustomButton.dart';
 
 import 'MyPageView.dart';
 import 'package:bloc/bloc.dart';
+import 'package:provider/provider.dart';
+
+import 'StateCountManage.dart';
 
 class SimpleBlocDelegate extends BlocDelegate {
   @override
@@ -28,23 +32,26 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Code Sample for material.Scaffold',
-      theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
-      ),
-      home: MyStatefulWidget(),
-      routes: <String, WidgetBuilder>{
-        '/odd': (BuildContext context) => MyPageView(
-              mcontext: context,
-              mtitle: 'Odd',
-            ),
-        '/even': (BuildContext context) => MyPageView(
-              mcontext: context,
-              mtitle: 'Even',
-            ),
-      },
+    return ChangeNotifierProvider<StateCountManage>(
+      builder: (_) => StateCountManage(),
+      child: MaterialApp(
+        title: 'Flutter Code Sample for material.Scaffold',
+        theme: ThemeData(
+          primarySwatch: Colors.deepOrange,
+        ),
+        home: MyStatefulWidget(),
+        routes: <String, WidgetBuilder>{
+          '/odd': (BuildContext context) => MyPageView(
+                mcontext: context,
+                mtitle: 'Odd',
+              ),
+          '/even': (BuildContext context) => MyPageView(
+                mcontext: context,
+                mtitle: 'Even',
+              ),
+        },
 //      debugShowMaterialGrid: true,
+      ),
     );
   }
 }
@@ -220,12 +227,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       floatingActionButton: MyCustomButton(
         onPressed: () => setState(() {
               _count++;
-//              _scrollCtrl.jumpTo(_rowHeight*_count);
+              StateCountManage countMan =
+                  Provider.of<StateCountManage>(context);
+              countMan.stateCount = _count;
               _scrollCtrl
                   .jumpTo(_scrollCtrl.position.maxScrollExtent + _rowHeight);
-
-//              _scrollCtrl.notifyListeners();
-//              _scrollCtrl.animateTo(_rowHeight*_count, duration: Duration(seconds: 1), curve: ElasticInCurve());
             }),
       ),
 

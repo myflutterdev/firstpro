@@ -4,20 +4,33 @@ import 'package:http/http.dart' as http;
 import 'package:myapp/user.dart';
 import 'bloc_exp.dart';
 
-class testUserList extends StatefulWidget {
-  testUserList({Key key}) : super(key: key);
+class TestUserList extends StatefulWidget {
+  TestUserList({Key key}) : super(key: key);
 
-  testUserListState createState() => testUserListState();
+  TestUserListState createState() => TestUserListState();
 }
 
-class testUserListState extends State<testUserList> {
+class TestUserListState extends State<TestUserList> {
   final _scrollCtl = ScrollController();
-  final UserBloc userbloc = UserBloc(httpClient: http.Client());
+  final userbloc = UserBloc(httpClient: http.Client());
   final _scrollThreshold = 200.0;
 
-  testUserListState() {
+  TestUserListState() {
     userbloc.dispatch(FetchUser());
     _scrollCtl.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    debugPrint('list dispose');
+    userbloc.dispose();
+    super.dispose();
+  }
+
+  @override
+  void deactivate() {
+    debugPrint('deactive');
+    super.deactivate();
   }
 
   void _onScroll() {
@@ -75,12 +88,15 @@ class testUserListState extends State<testUserList> {
   Widget _bottomLoader() {
     return Container(
       alignment: Alignment.center,
-      child: SizedBox(
-          width: 36,
-          height: 36,
-          child: CircularProgressIndicator(
-            strokeWidth: 1.5,
-          )),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SizedBox(
+            width: 36,
+            height: 36,
+            child: CircularProgressIndicator(
+              strokeWidth: 1.5,
+            )),
+      ),
     );
   }
 
