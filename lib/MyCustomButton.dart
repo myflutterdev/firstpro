@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:myapp/StateCountManage.dart';
 import 'package:provider/provider.dart';
 
+part 'MyCustomText.dart';
+
 class MyCustomButton extends StatelessWidget {
   MyCustomButton({@required this.onPressed});
 
@@ -43,6 +45,12 @@ class MyCustomButton extends StatelessWidget {
                 color: Colors.white,
                 fontStyle: FontStyle.italic,
                 fontSize: 20)),
+                
+        SizedBox(
+          width: 10,
+        ),
+
+        MyCustomTextView(),
       ],
     );
   }

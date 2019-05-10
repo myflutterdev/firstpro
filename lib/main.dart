@@ -32,8 +32,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<StateCountManage>(
-      builder: (_) => StateCountManage(),
+    return MultiProvider(
+      providers: [
+        Provider<StateCountManage>.value(
+          value: StateCountManage(),
+        ),
+      ],
       child: MaterialApp(
         title: 'Flutter Code Sample for material.Scaffold',
         theme: ThemeData(
@@ -180,7 +184,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               child: Row(
 //            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text('Cell Data $index',
+              Text('Cell Data $index of total $_count',
                   style: Theme.of(context).textTheme.headline),
             ],
           ))),
@@ -230,8 +234,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               StateCountManage countMan =
                   Provider.of<StateCountManage>(context);
               countMan.stateCount = _count;
-              _scrollCtrl
-                  .jumpTo(_scrollCtrl.position.maxScrollExtent + _rowHeight);
+              _scrollCtrl.jumpTo(
+                  _scrollCtrl.position.maxScrollExtent + _rowHeight);
             }),
       ),
 
