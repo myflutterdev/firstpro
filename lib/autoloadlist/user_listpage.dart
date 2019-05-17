@@ -15,9 +15,11 @@ class TestUserListState extends State<TestUserList> {
   final userbloc = UserBloc(httpClient: http.Client());
   final _scrollThreshold = 200.0;
 
-  TestUserListState() {
-    userbloc.dispatch(FetchUser());
+  @override
+  void initState() {
+    super.initState();
     _scrollCtl.addListener(_onScroll);
+    userbloc.dispatch(FetchUser());
   }
 
   @override
