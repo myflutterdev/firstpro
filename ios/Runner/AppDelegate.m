@@ -32,7 +32,7 @@
                 result(ret);
             }
         });
-        [ws.fvc popRoute];
+        // [ws.fvc popRoute];
     }];
     
 }

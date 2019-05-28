@@ -19,7 +19,7 @@ class MyPageView extends StatelessWidget {
 //  Future<User> demoFetch;
 
 
-  static const platform = const MethodChannel('test.flutter.io/jump');
+  static const platformChannel = const MethodChannel('test.flutter.io/jump');
 
   static const jmpMethodName = 'jumpFromFlutter:';
 
@@ -52,9 +52,10 @@ class MyPageView extends StatelessWidget {
     }
 
     try {
-      final dynamic resl = await platform
+      final dynamic resl = await platformChannel
           .invokeMethod(jmpMethodName, {'param1': 'val1', 'param2': 'val2'});
       debugPrint("native return: $resl");
+      Navigator.pop(mcontext);
     } catch (e) {
       debugPrint(e.toString());
     } finally {
@@ -124,14 +125,14 @@ class MyPageView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           Text("Got data: ${snapshot.data.toJson()}"),
-                          RawMaterialButton(
-                            fillColor: Colors.orange,
-                            splashColor: Colors.deepOrange,
-                            onPressed: _testTriggerMore,
-                            child: Text("LoadMore"),
-                            textStyle:
-                                Theme.of(mcontext).primaryTextTheme.button,
-                          ),
+                          // RawMaterialButton(
+                          //   fillColor: Colors.orange,
+                          //   splashColor: Colors.deepOrange,
+                          //   onPressed: _testTriggerMore,
+                          //   child: Text("LoadMore"),
+                          //   textStyle:
+                          //       Theme.of(mcontext).primaryTextTheme.button,
+                          // ),
 //                          UserListView(),
 
 //                          Expanded(child: UserListView()),

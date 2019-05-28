@@ -42,7 +42,6 @@ class MyApp extends StatelessWidget {
         Provider<StateCountManage>.value(
           value: StateCountManage(),
         ),
-        
       ],
       child: MaterialApp(
         title: 'Flutter Code Sample for material.Scaffold',
@@ -81,6 +80,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   ScrollController _scrollCtrl;
   final _myListKey = GlobalKey<AnimatedListState>();
 
+  final TextEditingController _textEditingController = TextEditingController();
+
+  final _focusNode = FocusNode();
   _MyStatefulWidgetState();
 
   @override
@@ -127,7 +129,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   void _testNavi(int index) {
     // _testSwitchApp();
     // return ;
-    
+
     if (index % 2 == 0) {
       Navigator.pushNamed(context, '/even');
     } else {
@@ -253,7 +255,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              Text('total_count: $_count, $_message'),
+              Text(
+                'total_count: $_count, $_message',
+                style: TextStyle(fontSize: 30),
+              ),
               GestureDetector(
                 onTap: () => _scrollCtrl.jumpTo(0),
                 child: Container(
@@ -268,6 +273,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ),
               Expanded(
                 child: buildListView,
+              ),
+              EditableText(
+                cursorColor: Colors.yellow,
+                backgroundCursorColor: Colors.blue,
+                controller: _textEditingController,
+                focusNode: _focusNode,
+                autofocus: true,
+                keyboardType: TextInputType.multiline,
+                maxLines: 1,
+                style: TextStyle(fontSize: 30, color: Colors.black12),
               ),
             ],
           ),
